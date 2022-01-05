@@ -1,0 +1,14 @@
+.ncContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #ccc;
+    color: #444;
+    width: 600px;
+    height: 200px;
+    border-radius: 5px;
+}
+label{
+    display: block;
+}
