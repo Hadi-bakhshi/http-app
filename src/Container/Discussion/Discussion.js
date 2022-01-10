@@ -11,10 +11,8 @@ const Discussion = () => {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const { data } = await axios.get(
-          "http://localhost:3001/comments"
-        );
-        setComments(data.slice(0, 4));
+        const { data } = await axios.get("http://localhost:3001/comments");
+        setComments(data);
       } catch (error) {
         console.log(error);
       }
@@ -24,7 +22,20 @@ const Discussion = () => {
 
   const selectCommentHandler = (id) => {
     setSelectedId(id);
-  }
+  };
+
+  const postCommentHandler = (comment) => {
+    axios
+      .post("http://localhost:3001/comments", {
+        ...comment,
+        postId: 100,
+      })
+      .then((res) => axios.get("http://localhost:3001/comments"))
+      .then((res) => setComments(res.data))
+      .catch((error) => console.log(error));
+  };
+
+ 
 
   return (
     <main>
@@ -43,13 +54,15 @@ const Discussion = () => {
         )}
       </section>
       <section>
-        <FullComment commentId={selectedId} />
+        <FullComment setComments={setComments} commentId={selectedId} />
       </section>
       <section>
-        <NewComment />
+        <NewComment onAddPost={postCommentHandler} />
       </section>
     </main>
   );
 };
 
 export default Discussion;
+
+// json-server --watch db.json --port 3001
