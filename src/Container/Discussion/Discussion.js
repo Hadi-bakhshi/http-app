@@ -3,8 +3,9 @@ import Comment from "../../Components/Comment/Comment";
 import FullComment from "../../Components/FullComment/FullComment";
 import NewComment from "../../Components/NewComment/NewComment";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import http from "../../services/httpService";
 import { toast } from "react-toastify";
+
 
 const Discussion = () => {
   const [comments, setComments] = useState(null);
@@ -14,7 +15,7 @@ const Discussion = () => {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const { data } = await axios.get("http://localhost:3001/comments");
+        const { data } = await http.get("/comments");
         setComments(data);
       } catch (error) {
         // console.log(error);
@@ -29,15 +30,17 @@ const Discussion = () => {
     setSelectedId(id);
   };
 
-  const postCommentHandler = (comment) => {
-    axios
-      .post("http://localhost:3001/comments", {
+  const postCommentHandler = async (comment) => {
+    try {
+      await http.post("/comments", {
         ...comment,
         postId: 100,
-      })
-      .then((res) => axios.get("http://localhost:3001/comments"))
-      .then((res) => setComments(res.data))
-      .catch((error) => console.log(error));
+      });
+      const { data } = await http.get("/comments");
+      setComments(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const renderComments = () => {
@@ -67,7 +70,7 @@ const Discussion = () => {
     <main>
       <section>{renderComments()}</section>
       <section>
-        <FullComment setComments={setComments} commentId={selectedId} />
+        <FullComment setComments={setComments} commentId={selectedId} setSelectedId={setSelectedId} />
       </section>
       <section>
         <NewComment onAddPost={postCommentHandler} />
