@@ -3,6 +3,7 @@ import "./fullcomment.css";
 import { getAllComments } from "../../services/getAllCommentsService";
 import { deleteComment } from "../../services/deleteCommentService";
 import { getOneComment } from "../../services/getOneCommentService";
+import { toast } from "react-toastify";
 
 const FullComment = ({ commentId, setComments, setSelectedId }) => {
   const [comment, setComment] = useState(null);
@@ -21,6 +22,7 @@ const FullComment = ({ commentId, setComments, setSelectedId }) => {
       setComments(data);
       setSelectedId(null);
       setComment(null);
+      toast.success("Comment deleted successfully");
     } catch (error) {
       console.log(error);
     }
