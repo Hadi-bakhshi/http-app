@@ -3,7 +3,8 @@ import Comment from "../../Components/Comment/Comment";
 import FullComment from "../../Components/FullComment/FullComment";
 import NewComment from "../../Components/NewComment/NewComment";
 import { useEffect, useState } from "react";
-import http from "../../services/httpService";
+import {getAllComments} from '././../../services/getAllCommentsService';
+import {addNewComment} from '././../../services/addNewCommentService';
 import { toast } from "react-toastify";
 
 
@@ -15,7 +16,7 @@ const Discussion = () => {
   useEffect(() => {
     const getComments = async () => {
       try {
-        const { data } = await http.get("/comments");
+        const { data } = await getAllComments();
         setComments(data);
       } catch (error) {
         // console.log(error);
@@ -32,11 +33,9 @@ const Discussion = () => {
 
   const postCommentHandler = async (comment) => {
     try {
-      await http.post("/comments", {
-        ...comment,
-        postId: 100,
-      });
-      const { data } = await http.get("/comments");
+      await addNewComment({...comment, postId:10});
+      toast.success("Comment added successfully");
+      const { data } = await getAllComments();
       setComments(data);
     } catch (error) {
       console.log(error);
