@@ -3,10 +3,10 @@ import Comment from "../../Components/Comment/Comment";
 import FullComment from "../../Components/FullComment/FullComment";
 import NewComment from "../../Components/NewComment/NewComment";
 import { useEffect, useState } from "react";
-import {getAllComments} from '././../../services/getAllCommentsService';
-import {addNewComment} from '././../../services/addNewCommentService';
+import { getAllComments } from "././../../services/getAllCommentsService";
+import { addNewComment } from "././../../services/addNewCommentService";
 import { toast } from "react-toastify";
-
+import { Link } from "react-router-dom";
 
 const Discussion = () => {
   const [comments, setComments] = useState(null);
@@ -33,7 +33,7 @@ const Discussion = () => {
 
   const postCommentHandler = async (comment) => {
     try {
-      await addNewComment({...comment, postId:10});
+      await addNewComment({ ...comment, postId: 10 });
       toast.success("Comment added successfully");
       const { data } = await getAllComments();
       setComments(data);
@@ -54,12 +54,13 @@ const Discussion = () => {
     // if everything is fine then render the comments
     if (comments && !error) {
       renderedComments = comments.map((c) => (
-        <Comment
-          key={c.id}
-          name={c.name}
-          email={c.email}
-          onClick={() => selectCommentHandler(c.id)}
-        />
+        <Link to={`/comments/${c.id}`} key={c.id}>
+          <Comment
+            name={c.name}
+            email={c.email}
+            onClick={() => selectCommentHandler(c.id)}
+          />
+        </Link>
       ));
     }
     return renderedComments;
@@ -67,13 +68,13 @@ const Discussion = () => {
 
   return (
     <main>
-      <section>{renderComments()}</section>
-      <section>
+      <section className="cmSection">{renderComments()}</section>
+      {/* <section>
         <FullComment setComments={setComments} commentId={selectedId} setSelectedId={setSelectedId} />
       </section>
       <section>
         <NewComment onAddPost={postCommentHandler} />
-      </section>
+      </section> */}
     </main>
   );
 };

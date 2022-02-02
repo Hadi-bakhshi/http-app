@@ -1,0 +1,23 @@
+.navbarContainer {
+    background-color: #efefef;
+    height: 60px;
+    padding-top: 15px;
+}
+
+.navbarul {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  font-size: 18px;
+}
+.navbarul .navbarli {
+  margin-left: 20px;
+}
+.navbarli a:hover {
+  color: magenta;
+}
+
+.activeLink{
+    color: blueviolet;
+}
