@@ -1,22 +1,28 @@
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100vh;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 a {
   text-decoration: none;
   color: #444;
 }
 footer{
-  background-color: #ccc;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+  background-color: #fae8ff;
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -25,7 +31,7 @@ span {
   display: block;
 }
 .activeLink{
-  color: blueviolet;
+  color: #9f1239;
 }
 ul {
   list-style-type: none;

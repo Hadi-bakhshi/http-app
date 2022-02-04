@@ -37,7 +37,7 @@ const NewComment = ({history}) => {
         <label>Body</label>
         <textarea type="textarea" onChange={changeHandler} name="content" />
       </div>
-      <button onClick={() => postCommentHandler(comment)}>Add New Comment</button>
+      <button className="addBtn" onClick={() => postCommentHandler(comment)}>Add New Comment</button>
     </div>
   );
 };

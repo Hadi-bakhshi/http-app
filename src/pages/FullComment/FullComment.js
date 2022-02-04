@@ -21,7 +21,7 @@ const FullComment = ({ match,history }) => {
       await deleteComment(commentId);
       history.push("/");
       setComment(null);
-      toast.success("Comment deleted successfully");
+      toast.success("Comment deleted successfully" );
     } catch (error) {
       toast.error("Something went wrong");
     }
@@ -36,7 +36,7 @@ const FullComment = ({ match,history }) => {
         <p>{comment.name}</p>
         <p>{comment.email}</p>
         <p>{comment.body}</p>
-        <button onClick={deletehandler}>Delete</button>
+        <button className="removeBtn" onClick={deletehandler}>Delete</button>
       </div>
     );
   }

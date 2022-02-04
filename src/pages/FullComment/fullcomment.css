@@ -2,11 +2,23 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
-    background-color: #ccc;
-    color: #444;
-
-    height: 200px;
+    justify-content: space-around;
+    background-color: #fae8ffcc;
+    color: #701a75;
+    height: 300px;
     border-radius: 5px;
     margin: 20px 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+.removeBtn{
+    border: 2px solid #9f1239;
+    padding: 8px 20px;
+    border-radius: 10px;
+    color: #9f1239;
+    background-color: #ffe4e6;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
 }
