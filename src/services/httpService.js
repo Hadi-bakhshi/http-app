@@ -2,7 +2,6 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'http://localhost:3001';
 axios.interceptors.response.use((response) =>{
-    console.log(response);
     return response;
 }, (error) => {console.log(error);
 return Promise.reject(error);
