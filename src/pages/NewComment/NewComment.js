@@ -1,10 +1,9 @@
 
 import { useState } from "react";
-import { getAllComments } from "../../services/getAllCommentsService";
 import { addNewComment } from "../../services/addNewCommentService";
 import { toast } from "react-toastify";
 import "./newcomment.css";
-const NewComment = ({setComments}) => {
+const NewComment = ({history}) => {
   const [comment, setComment] = useState({
     name: "",
     email: "",
@@ -18,10 +17,9 @@ const NewComment = ({setComments}) => {
     try {
       await addNewComment({ ...comment, postId: 10 });
       toast.success("Comment added successfully");
-      const { data } = await getAllComments();
-      setComments(data);
+      history.push("/");
     } catch (error) {
-      console.log(error);
+      toast.error("Comment added successfully");
     }
   };
 
