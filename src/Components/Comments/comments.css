@@ -4,4 +4,12 @@
   align-items: center;
   justify-content: space-around;
   padding: 10px;
+
 }
+
+@media screen and (max-width: 768px) {
+  .cmSection {
+    flex-direction: column;
+  }
+}
+  

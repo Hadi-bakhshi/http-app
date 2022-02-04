@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import "./fullcomment.css";
-import { getAllComments } from "../../services/getAllCommentsService";
 import { deleteComment } from "../../services/deleteCommentService";
 import { getOneComment } from "../../services/getOneCommentService";
 import { toast } from "react-toastify";
 
-const FullComment = ({setComments, setSelectedId, match }) => {
+const FullComment = ({ match,history }) => {
 
   const [comment, setComment] = useState(null);
   const commentId = match.params.id;
@@ -20,13 +19,11 @@ const FullComment = ({setComments, setSelectedId, match }) => {
   const deletehandler = async () => {
     try {
       await deleteComment(commentId);
-      const { data } = await getAllComments();
-      setComments(data);
-      setSelectedId(null);
+      history.push("/");
       setComment(null);
-      toast.success("Comment deleted successfully");
+      toast.success("Comment deleted successfully" );
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -39,7 +36,7 @@ const FullComment = ({setComments, setSelectedId, match }) => {
         <p>{comment.name}</p>
         <p>{comment.email}</p>
         <p>{comment.body}</p>
-        <button onClick={deletehandler}>Delete</button>
+        <button className="removeBtn" onClick={deletehandler}>Delete</button>
       </div>
     );
   }

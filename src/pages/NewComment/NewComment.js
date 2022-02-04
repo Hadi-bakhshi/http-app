@@ -1,7 +1,9 @@
 
 import { useState } from "react";
+import { addNewComment } from "../../services/addNewCommentService";
+import { toast } from "react-toastify";
 import "./newcomment.css";
-const NewComment = ({onAddPost}) => {
+const NewComment = ({history}) => {
   const [comment, setComment] = useState({
     name: "",
     email: "",
@@ -9,6 +11,16 @@ const NewComment = ({onAddPost}) => {
   });
   const changeHandler = (e) => {
     setComment({ ...comment, [e.target.name]: e.target.value });
+  };
+
+  const postCommentHandler = async (comment) => {
+    try {
+      await addNewComment({ ...comment, postId: 10 });
+      toast.success("Comment added successfully");
+      history.push("/");
+    } catch (error) {
+      toast.error("Comment added successfully");
+    }
   };
 
   return (
@@ -25,7 +37,7 @@ const NewComment = ({onAddPost}) => {
         <label>Body</label>
         <textarea type="textarea" onChange={changeHandler} name="content" />
       </div>
-      <button onClick={() => onAddPost(comment)}>Add New Comment</button>
+      <button className="addBtn" onClick={() => postCommentHandler(comment)}>Add New Comment</button>
     </div>
   );
 };

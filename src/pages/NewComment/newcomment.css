@@ -1,0 +1,46 @@
+.ncContainer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fae8ff;
+    color: #581c87;
+    margin: 1rem 2rem;
+    height: 300px;
+    border-radius: 5px;
+}
+.ncContainer input{
+  padding: 8px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid  #581c87;
+  color: #581c87;
+}
+.ncContainer input:focus{
+  border: 2px solid #581c87;
+}
+textarea{
+    padding: 8px 20px;
+  border-radius: 10px;
+  outline: none;
+  border: 1px solid  #581c87;
+  color: #581c87;
+}
+textarea:focus{
+    border: 2px solid #581c87;
+}
+label{
+    display: block;
+}
+
+.addBtn{
+    margin-top: 1rem;
+    border: 2px solid #581c87;
+    padding: 8px 20px;
+    border-radius: 10px;
+    color: #581c87;
+    background-color: #f3e8ff;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}

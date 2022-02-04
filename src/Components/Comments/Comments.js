@@ -1,16 +1,12 @@
-import "./discussion.css";
-import Comment from "../../Components/Comment/Comment";
-import FullComment from "../../Components/FullComment/FullComment";
-import NewComment from "../../Components/NewComment/NewComment";
+import "./comments.css";
+import Comment from "./Comment/Comment";
 import { useEffect, useState } from "react";
-import { getAllComments } from "././../../services/getAllCommentsService";
-import { addNewComment } from "././../../services/addNewCommentService";
+import { getAllComments } from "../../services/getAllCommentsService";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
-const Discussion = () => {
+const Comments = () => {
   const [comments, setComments] = useState(null);
-  const [selectedId, setSelectedId] = useState(null);
   const [error, setError] = useState(false);
 
   useEffect(() => {
@@ -27,20 +23,9 @@ const Discussion = () => {
     getComments();
   }, []);
 
-  const selectCommentHandler = (id) => {
-    setSelectedId(id);
-  };
 
-  const postCommentHandler = async (comment) => {
-    try {
-      await addNewComment({ ...comment, postId: 10 });
-      toast.success("Comment added successfully");
-      const { data } = await getAllComments();
-      setComments(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
+  
 
   const renderComments = () => {
     // first it tries to load the comments from the backend
@@ -58,7 +43,6 @@ const Discussion = () => {
           <Comment
             name={c.name}
             email={c.email}
-            onClick={() => selectCommentHandler(c.id)}
           />
         </Link>
       ));
@@ -66,19 +50,9 @@ const Discussion = () => {
     return renderedComments;
   };
 
-  return (
-    <main>
-      <section className="cmSection">{renderComments()}</section>
-      {/* <section>
-        <FullComment setComments={setComments} commentId={selectedId} setSelectedId={setSelectedId} />
-      </section>
-      <section>
-        <NewComment onAddPost={postCommentHandler} />
-      </section> */}
-    </main>
-  );
+  return <section className="cmSection">{renderComments()}</section>;
 };
 
-export default Discussion;
+export default Comments;
 
 // json-server --watch db.json --port 3001
